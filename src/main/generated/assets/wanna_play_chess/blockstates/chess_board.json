@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "wanna_play_chess:block/chess_board",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "wanna_play_chess:block/chess_board"
+    },
+    "facing=south": {
+      "model": "wanna_play_chess:block/chess_board",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "wanna_play_chess:block/chess_board",
+      "y": 270
+    }
+  }
+}

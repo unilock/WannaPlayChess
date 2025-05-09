@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "wanna_play_chess:black_bone"
+  },
+  "result": {
+    "count": 1,
+    "id": "wanna_play_chess:black_bishop"
+  }
+}

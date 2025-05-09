@@ -1,0 +1,18 @@
+{
+  "required": true,
+  "package": "net.fieldb0y.wanna_play_chess.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "client": [
+    "BoxForItemsRenderer",
+    "CameraMixin",
+    "CheckBoxWidgetMixin",
+    "DrawContextAccessor",
+    "HandledScreenAccessor",
+    "ScreenAccessor"
+  ]
+}

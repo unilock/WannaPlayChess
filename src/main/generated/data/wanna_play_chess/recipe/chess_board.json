@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "chessboard",
+  "key": {
+    "#": {
+      "tag": "minecraft:wooden_slabs"
+    },
+    "b": {
+      "item": "minecraft:black_dye"
+    },
+    "w": {
+      "item": "minecraft:white_dye"
+    }
+  },
+  "pattern": [
+    "bwb",
+    "wbw",
+    "###"
+  ],
+  "result": {
+    "count": 1,
+    "id": "wanna_play_chess:chess_board"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "black_bone",
+  "ingredients": [
+    {
+      "item": "minecraft:bone"
+    },
+    {
+      "tag": "wanna_play_chess:black_bone_components"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "wanna_play_chess:black_bone"
+  }
+}

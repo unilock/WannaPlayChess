@@ -1,0 +1,38 @@
+{
+  "move_self": {
+    "subtitle": "wanna_play_chess.move_self",
+    "sounds": [
+      "wanna_play_chess:move_self"
+    ]
+  },
+  "move_check": {
+    "subtitle": "wanna_play_chess.move_check",
+    "sounds": [
+      "wanna_play_chess:move_check"
+    ]
+  },
+  "castle": {
+    "subtitle": "wanna_play_chess.castle",
+    "sounds": [
+      "wanna_play_chess:castle"
+    ]
+  },
+  "capture": {
+    "subtitle": "wanna_play_chess.capture",
+    "sounds": [
+      "wanna_play_chess:capture"
+    ]
+  },
+  "promote": {
+    "subtitle": "wanna_play_chess.promote",
+    "sounds": [
+      "wanna_play_chess:promote"
+    ]
+  },
+  "notify": {
+    "subtitle": "wanna_play_chess.notify",
+    "sounds": [
+      "wanna_play_chess:notify"
+    ]
+  }
+}

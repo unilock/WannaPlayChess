@@ -1,0 +1,39 @@
+{
+	"schemaVersion": 1,
+	"id": "wanna_play_chess",
+	"version": "${version}",
+	"name": "Wanna Play Chess?",
+	"description": "This mod allows you to play chess with your friends in minecraft",
+	"authors": [
+		"FieldB0y"
+	],
+	"contact": {
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "MIT",
+	"icon": "assets/wanna_play_chess/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"net.fieldb0y.wanna_play_chess.WannaPlayChess"
+		],
+		"fabric-datagen": [
+			"net.fieldb0y.wanna_play_chess.WannaPlayChessDataGenerator"
+		],
+		"client": [
+			"net.fieldb0y.wanna_play_chess.WannaPlayChessClient"
+		]
+	},
+	"mixins": [
+		"wanna_play_chess.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.16.10",
+		"minecraft": "~1.21.1",
+		"java": ">=21",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}

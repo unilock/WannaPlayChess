@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:copy_components",
+              "include": [
+                "wanna_play_chess:inserted_pieces_sets"
+              ],
+              "source": "block_entity"
+            }
+          ],
+          "name": "wanna_play_chess:chess_board"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ]
+}

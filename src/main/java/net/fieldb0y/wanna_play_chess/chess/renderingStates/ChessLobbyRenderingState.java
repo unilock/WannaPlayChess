@@ -205,7 +205,7 @@ public class ChessLobbyRenderingState extends ChessRenderingState {
         if (time != gameTimeInSec){
             ClientPlayNetworking.send(new LobbyGameTimePayload(blockEntity.getPos(), time));
             this.gameTimeInSec = time;
-            setGameTimeTextFields(time);
+            //setGameTimeTextFields(time);
         }
     }
 

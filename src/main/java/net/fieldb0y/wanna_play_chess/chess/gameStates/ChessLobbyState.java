@@ -127,6 +127,10 @@ public class ChessLobbyState extends ChessState {
         ((ChessGameState)blockEntity.states.get(ChessBoardBlockEntity.GAME_STATE)).startGame(playersInLobby, gameTimeInSec, noTimeControl, firstPlayerRole, playersInLobby[FIRST] == null || playersInLobby[SECOND] == null);
     }
 
+    public boolean isPlayerInLobby(UUID uuid){
+        return playersInLobby[FIRST].compareTo(uuid) == 0 || playersInLobby[SECOND].compareTo(uuid) == 0;
+    }
+
     @Override
     public void clear() {
         clearLobby();

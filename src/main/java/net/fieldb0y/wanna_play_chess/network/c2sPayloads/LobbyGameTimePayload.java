@@ -33,7 +33,7 @@ public record LobbyGameTimePayload(BlockPos blockEntityPos, int timeInSec) imple
         if (be instanceof ChessBoardBlockEntity blockEntity && blockEntity.currentState instanceof ChessLobbyState lobbyState){
             lobbyState.setGameTimeInSec(lobbyPayload.timeInSec);
             for (ServerPlayerEntity player : context.server().getPlayerManager().getPlayerList())
-                ServerPlayNetworking.send(player, new SetGameTimeTextFieldPayload(lobbyPayload.timeInSec));
+                ServerPlayNetworking.send(player, new SetGameTimeTextFieldPayload(blockEntity.getPos(), lobbyPayload.timeInSec));
         }
     }
 }

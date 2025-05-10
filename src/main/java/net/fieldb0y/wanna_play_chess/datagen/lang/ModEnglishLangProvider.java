@@ -2,6 +2,7 @@ package net.fieldb0y.wanna_play_chess.datagen.lang;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
+import net.fieldb0y.wanna_play_chess.WannaPlayChess;
 import net.fieldb0y.wanna_play_chess.chess.renderingStates.ChessGameOverRenderingState;
 import net.fieldb0y.wanna_play_chess.chess.renderingStates.ChessGameRenderingState;
 import net.fieldb0y.wanna_play_chess.chess.renderingStates.ChessLobbyRenderingState;
@@ -90,6 +91,8 @@ public class ModEnglishLangProvider extends FabricLanguageProvider {
         addText(translationBuilder, BoxForPieces.EMPTY_BOX_SHIFT_TOOLTIP, "Take the piece in your other hand and right-click to put it in the box");
         addText(translationBuilder, BoxForPieces.BOX_SHIFT_TOOLTIP, "To empty the box right-click while you sneaking");
         addText(translationBuilder, BoxForPieces.PRESS_SHIFT_TOOLTIP, "§7Press§r §e[shift]§r §7to get more info§r");
+
+        addText(translationBuilder, WannaPlayChess.CANT_TAKE_OUT_SETS_MESSAGE, "You can't draw sets of pieces during the game!");
     }
 
     private static void addText(@NotNull TranslationBuilder builder, @NotNull Text text, @NotNull String value){

@@ -2,6 +2,7 @@ package net.fieldb0y.wanna_play_chess.datagen.lang;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
+import net.fieldb0y.wanna_play_chess.WannaPlayChess;
 import net.fieldb0y.wanna_play_chess.chess.renderingStates.ChessGameOverRenderingState;
 import net.fieldb0y.wanna_play_chess.chess.renderingStates.ChessGameRenderingState;
 import net.fieldb0y.wanna_play_chess.chess.renderingStates.ChessLobbyRenderingState;
@@ -90,6 +91,8 @@ public class ModRussianLangProvider extends FabricLanguageProvider {
         addText(translationBuilder, BoxForPieces.EMPTY_BOX_SHIFT_TOOLTIP, "Возьми фигуру в другую руку и щелкни правой кнопкой мыши, чтобы положить ее в коробку");
         addText(translationBuilder, BoxForPieces.BOX_SHIFT_TOOLTIP, "Чтобы опустошить коробку  щёлкни правой кнопкой мыши по крадёшся");
         addText(translationBuilder, BoxForPieces.PRESS_SHIFT_TOOLTIP, "§7Нажми§r §e[shift]§r §7чтобы получить больше информации§r");
+
+        addText(translationBuilder, WannaPlayChess.CANT_TAKE_OUT_SETS_MESSAGE, "Ты не можешь вытащить наборы фигур во время игры!");
     }
 
     private static void addText(@NotNull TranslationBuilder builder, @NotNull Text text, @NotNull String value){

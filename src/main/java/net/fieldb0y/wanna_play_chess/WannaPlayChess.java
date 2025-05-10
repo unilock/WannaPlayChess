@@ -11,6 +11,8 @@ import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRe
 import net.fieldb0y.wanna_play_chess.block.ModBlocks;
 import net.fieldb0y.wanna_play_chess.block.entity.ChessBoardBlockEntity;
 import net.fieldb0y.wanna_play_chess.block.entity.ModBlockEntities;
+import net.fieldb0y.wanna_play_chess.chess.gameStates.ChessGameState;
+import net.fieldb0y.wanna_play_chess.chess.gameStates.ChessLobbyState;
 import net.fieldb0y.wanna_play_chess.entity.ModEntities;
 import net.fieldb0y.wanna_play_chess.entity.custom.PlayerCopyEntity;
 import net.fieldb0y.wanna_play_chess.item.ModComponents;
@@ -22,7 +24,9 @@ import net.fieldb0y.wanna_play_chess.network.s2cPayloads.SetGameTimeTextFieldPay
 import net.fieldb0y.wanna_play_chess.network.s2cPayloads.TimerUpdatePayload;
 import net.fieldb0y.wanna_play_chess.screenhandler.ModScreenHandlers;
 import net.fieldb0y.wanna_play_chess.sound.ModSounds;
+import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.Formatting;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -100,21 +104,27 @@ public class WannaPlayChess implements ModInitializer {
 		PayloadTypeRegistry.playS2C().register(TimerUpdatePayload.ID, TimerUpdatePayload.CODEC);
 	}
 
+	public static final Text CANT_TAKE_OUT_SETS_MESSAGE = Text.translatable("wanna_play_chess.cant_take_out_sets_message");
 	public void registerEvents(){
 		UseBlockCallback.EVENT.register(((player, world, hand, blockHitResult) -> {
-			if (!world.isClient() && world.getBlockEntity(blockHitResult.getBlockPos()) instanceof ChessBoardBlockEntity blockEntity && player.isSneaking()){
-				if (blockEntity.whiteSetInsereted || blockEntity.blackSetInserted){
-					if (blockEntity.whiteSetInsereted){
-						blockEntity.removePiecesSet(WHITE);
-						player.giveItemStack(BoxForPieces.getFullBoxStack(WHITE));
+			if (!world.isClient() && world.getBlockEntity(blockHitResult.getBlockPos()) instanceof ChessBoardBlockEntity blockEntity && player.isSneaking()) {
+				if (blockEntity.currentState instanceof ChessLobbyState) {
+					if (blockEntity.whiteSetInsereted || blockEntity.blackSetInserted) {
+						if (blockEntity.whiteSetInsereted) {
+							blockEntity.removePiecesSet(WHITE);
+							player.giveItemStack(BoxForPieces.getFullBoxStack(WHITE));
+						}
+						if (blockEntity.blackSetInserted) {
+							blockEntity.removePiecesSet(BLACK);
+							player.giveItemStack(BoxForPieces.getFullBoxStack(BLACK));
+						}
 					}
-					if (blockEntity.blackSetInserted){
-						blockEntity.removePiecesSet(BLACK);
-						player.giveItemStack(BoxForPieces.getFullBoxStack(BLACK));
-					}
+					return ActionResult.SUCCESS;
+				} else {
+					player.sendMessage(CANT_TAKE_OUT_SETS_MESSAGE.copy().formatted(Formatting.RED));
 				}
-				return ActionResult.SUCCESS;
 			}
+
 
 			return ActionResult.PASS;
 		}));

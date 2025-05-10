@@ -23,6 +23,7 @@
   "wanna_play_chess.box_for_pieces.press_shift_tooltip": "§7Press§r §e[shift]§r §7to get more info§r",
   "wanna_play_chess.box_for_pieces.set_already_inserted": "This set of chess pieces is already inserted",
   "wanna_play_chess.box_for_pieces.successful_set_insert": "The chess set has been successfully inserted",
+  "wanna_play_chess.cant_take_out_sets_message": "You can't draw sets of pieces during the game!",
   "wanna_play_chess.game_over_reason.agreed_draw": "Agreed draw",
   "wanna_play_chess.game_over_reason.checkmate": "Checkmate",
   "wanna_play_chess.game_over_reason.impossible_to_win": "Impossible to win",

@@ -23,6 +23,7 @@
   "wanna_play_chess.box_for_pieces.press_shift_tooltip": "§7Нажми§r §e[shift]§r §7чтобы получить больше информации§r",
   "wanna_play_chess.box_for_pieces.set_already_inserted": "Этот набор шахматных фигур уже вставлен",
   "wanna_play_chess.box_for_pieces.successful_set_insert": "Шахматный набор успешно вставлен",
+  "wanna_play_chess.cant_take_out_sets_message": "Ты не можешь вытащить наборы фигур во время игры!",
   "wanna_play_chess.game_over_reason.agreed_draw": "Согласованная ничья",
   "wanna_play_chess.game_over_reason.checkmate": "Мат",
   "wanna_play_chess.game_over_reason.impossible_to_win": "Теоритическая ничья",

@@ -149,7 +149,6 @@ public class ChessBoardRenderer implements BlockEntityRenderer<ChessBoardBlockEn
     private void renderPossibleMoves(ChessBoardBlockEntity blockEntity, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
         if (blockEntity.currentState instanceof ChessGameState state){
             Map<PieceAction, List<Vector2i>> possibleMoves = state.getPossibleMoves();
-            System.out.println(possibleMoves);
             if (!possibleMoves.isEmpty())
                 renderSquareOnCell(state.currentChosenCell.x, state.currentChosenCell.y, new Vector4i(252, 186, 3, 141), state.getGrid(), matrices, vertexConsumers, light, overlay);
             for (PieceAction action : possibleMoves.keySet()){

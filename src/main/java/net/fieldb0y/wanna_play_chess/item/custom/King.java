@@ -81,11 +81,9 @@ public class King extends ChessPiece {
                                     }
                                     return PieceAction.NONE;
                                 }
-                                if (new Vector2i(3, 4).equals(x, y)) System.out.println("Pos: " + new Vector2i(i, j) + " | Moves: " + piecePossibleMoves);
                             }
                         } else {
                             List<Vector2i> path = ChessPiece.getAttackPath(new Vector2i(i, j), new Vector2i(x, y), piece, true);
-                            //if (!path.isEmpty() && currentPieceId == ChessPieces.BLACK_ROOK.id) System.out.println("PieceCell: " + new Vector2i(i, j) + " | Path: " + path);
                             if (!path.isEmpty() && !path.getLast().equals(i, j)){
                                 boolean isPieceOnPath = false;
                                 for (Vector2i cell : path){

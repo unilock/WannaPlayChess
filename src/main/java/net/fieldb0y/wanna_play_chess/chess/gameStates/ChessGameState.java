@@ -5,7 +5,6 @@ import net.fieldb0y.wanna_play_chess.block.entity.ChessBoardBlockEntity;
 import net.fieldb0y.wanna_play_chess.chess.ChessGrid;
 import net.fieldb0y.wanna_play_chess.chess.PiecesData;
 import net.fieldb0y.wanna_play_chess.chess.utils.ChessGameOverReason;
-import net.fieldb0y.wanna_play_chess.chess.utils.ChessPieces;
 import net.fieldb0y.wanna_play_chess.chess.utils.PieceAction;
 import net.fieldb0y.wanna_play_chess.item.custom.ChessPiece;
 import net.fieldb0y.wanna_play_chess.sound.ModSounds;
@@ -18,10 +17,8 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtHelper;
 import net.minecraft.nbt.NbtInt;
 import net.minecraft.nbt.NbtList;
-import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
 import org.joml.Vector2i;
 import net.fieldb0y.wanna_play_chess.utils.Timer;
 
@@ -84,7 +81,7 @@ public class ChessGameState extends ChessState {
         this.blackTimeLeft = noTimeControl ? -1 : gameTime;
 
         gameTimers = new Timer[]{new Timer(this::whiteTimerTick, 1), new Timer(this::blackTimerTick, 1)};
-        updateClient();
+        updateClientAndServer();
 
         if (blockEntity.getWorld().isClient()) {
             MinecraftClient client = MinecraftClient.getInstance();
@@ -159,7 +156,7 @@ public class ChessGameState extends ChessState {
                 }
             }
         }
-        updateClient();
+        updateClientAndServer();
     }
 
     private void updatePremoveTags(){
@@ -241,14 +238,14 @@ public class ChessGameState extends ChessState {
         whiteTimeLeft--;
         if (whiteTimeLeft <= 0)
             gameOver(ChessGameOverReason.TIME_IS_UP, BLACK);
-        updateClient();
+        updateClientOnly();
     }
 
     public void blackTimerTick(){
         blackTimeLeft--;
         if (blackTimeLeft <= 0)
             gameOver(ChessGameOverReason.TIME_IS_UP, WHITE);
-        updateClient();
+        updateClientOnly();
     }
 
     private void updateShouldTurnTag(){
@@ -319,7 +316,7 @@ public class ChessGameState extends ChessState {
             }
         }
         updateCastleTags(whiteKingPos, blackKingPos);
-        updateClient();
+        updateClientAndServer();
     }
 
     private void updateCastleTags(Vector2i whiteKingPos, Vector2i blackKingPos){
@@ -422,7 +419,7 @@ public class ChessGameState extends ChessState {
 
     public void nextTurn(){
         currentTurn = currentTurn == WHITE ? BLACK : WHITE;
-        updateClient();
+        updateClientAndServer();
     }
 
     public Map<PieceAction, List<Vector2i>> getPossibleMoves(){
@@ -562,7 +559,7 @@ public class ChessGameState extends ChessState {
                 getWorld().getPlayerByUuid(players[role]).playSoundToPlayer(ModSounds.NOTIFY, SoundCategory.BLOCKS,1, 1);
         }
 
-        updateClient();
+        updateClientAndServer();
     }
 
     public void setDrawOfferRole(int role){
@@ -573,7 +570,7 @@ public class ChessGameState extends ChessState {
             if (player != null)
                 player.playSoundToPlayer(ModSounds.NOTIFY, SoundCategory.BLOCKS,1, 1);
         }
-        updateClient();
+        updateClientAndServer();
     }
 
     @Override
@@ -594,7 +591,7 @@ public class ChessGameState extends ChessState {
         this.gameTimers = new Timer[2];
         this.resignOfferRole = -1;
         this.drawOfferRole = -1;
-        updateClient();
+        updateClientAndServer();
     }
 
     public ChessGrid getGrid() {

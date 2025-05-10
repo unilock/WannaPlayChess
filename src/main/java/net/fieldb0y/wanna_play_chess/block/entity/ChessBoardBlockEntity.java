@@ -16,7 +16,6 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.component.ComponentMap;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.*;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.Packet;
@@ -116,14 +115,14 @@ public class ChessBoardBlockEntity extends BlockEntity implements ExtendedScreen
         if (role == WHITE)
             this.whiteSetInsereted = true;
         else this.blackSetInserted = true;
-        updateClient();
+        updateClientAndServer();
     }
 
     public void removePiecesSet(int role){
         if (role == WHITE)
             this.whiteSetInsereted = false;
         else this.blackSetInserted = false;
-        updateClient();
+        updateClientAndServer();
     }
 
     public boolean isSetInserted(int role){
@@ -172,7 +171,7 @@ public class ChessBoardBlockEntity extends BlockEntity implements ExtendedScreen
         if (getCachedState().get(ChessBoardBlock.GAME_STATE) != gameState.nbtValue){
             getWorld().setBlockState(getPos(), getCachedState().with(ChessBoardBlock.GAME_STATE, gameState.nbtValue));
         }
-        updateClient();
+        updateClientAndServer();
     }
 
     @Override
@@ -202,10 +201,17 @@ public class ChessBoardBlockEntity extends BlockEntity implements ExtendedScreen
         return createNbt(registryLookup);
     }
 
-    public void updateClient() {
+
+    public void updateClientAndServer() {
         this.markDirty();
         if (world != null && !world.isClient) {
             world.updateListeners(pos, getCachedState(), getCachedState(), Block.NOTIFY_ALL);
+        }
+    }
+
+    public void updateClientOnly() {
+        if (world != null && !world.isClient) {
+           world.updateListeners(pos, getCachedState(), getCachedState(), Block.NOTIFY_ALL);
         }
     }
 

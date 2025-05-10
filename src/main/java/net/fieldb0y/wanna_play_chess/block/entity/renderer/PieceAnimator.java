@@ -37,7 +37,7 @@ public class PieceAnimator {
 
     public void stopAnimation() {
         isAnimationPlaying = false;
-        grid.blockEntity.updateClient();
+        grid.blockEntity.updateClientAndServer();
     }
 
     public void readNbt(NbtCompound nbt) {

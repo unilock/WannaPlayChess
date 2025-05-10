@@ -79,17 +79,17 @@ public class ChessLobbyState extends ChessState {
 
     public void setGameTimeInSec(int gameTimeInSec){
         this.gameTimeInSec = gameTimeInSec;
-        updateClient();
+        updateClientAndServer();
     }
 
     public void setNoTimeControl(boolean checked) {
         this.noTimeControl = checked;
-        updateClient();
+        updateClientAndServer();
     }
 
     public void setFirstPlayerRole(int role) {
         this.firstPlayerRole = role;
-        updateClient();
+        updateClientAndServer();
     }
 
     public void addPlayer(PlayerEntity player){
@@ -97,7 +97,7 @@ public class ChessLobbyState extends ChessState {
             if (!Arrays.stream(playersInLobby).toList().contains(player.getUuid()))
                 this.playersInLobby[playersInLobby[FIRST] == null ? FIRST : SECOND] = player.getUuid();
         }
-        updateClient();
+        updateClientAndServer();
     }
 
     public void removePlayerFromLobby(UUID uuid){
@@ -105,7 +105,7 @@ public class ChessLobbyState extends ChessState {
             UUID currentUuid = playersInLobby[i];
             if (currentUuid != null && currentUuid.compareTo(uuid) == 0) playersInLobby[i] = null;
         }
-        updateClient();
+        updateClientAndServer();
     }
 
     public void removePlayerFromLobby(PlayerEntity player){
@@ -115,7 +115,7 @@ public class ChessLobbyState extends ChessState {
 
     public void clearLobby(){
         this.playersInLobby = new UUID[2];
-        updateClient();
+        updateClientAndServer();
     }
 
     public UUID[] getPlayersInLobby() {

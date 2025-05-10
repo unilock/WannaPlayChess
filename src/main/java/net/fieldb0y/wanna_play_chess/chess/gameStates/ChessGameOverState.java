@@ -33,11 +33,9 @@ public class ChessGameOverState extends ChessState{
         this.gameOverReason = gameOverReason;
         this.winnerRole = winnerRole;
         this.players = Arrays.copyOf(players, 2);
-        System.out.println(Arrays.toString(this.players));
         this.matedKingCell = grid.findPiecePos(chessGameState.getCheckedKing());
 
-        updateClient();
-        System.out.println("Reason: " + gameOverReason + " | Winner: " + winnerRole);
+        updateClientAndServer();
     }
 
     @Override
@@ -92,7 +90,7 @@ public class ChessGameOverState extends ChessState{
     @Override
     public void clear() {
         grid.clearGrid();
-        updateClient();
+        updateClientAndServer();
     }
 
     public boolean isPlayerInList(UUID uuid){

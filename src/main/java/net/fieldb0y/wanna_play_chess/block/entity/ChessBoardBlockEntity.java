@@ -95,10 +95,6 @@ public class ChessBoardBlockEntity extends BlockEntity implements ExtendedScreen
             if (chessLobbyState.getPlayersInLobby()[FIRST] == null && chessLobbyState.getPlayersInLobby()[SECOND] == null){
                 setGameState(GameState.NOT_READY_TO_PLAY);
             }
-            if ((chessLobbyState.getPlayersInLobby()[FIRST] != null && chessLobbyState.getPlayersInLobby()[SECOND] == null)
-                    || (chessLobbyState.getPlayersInLobby()[FIRST] == null && chessLobbyState.getPlayersInLobby()[SECOND] != null)){
-                setGameState(GameState.READY_FOR_SINGLEPLAYER_GAME);
-            }
         }
 
         if (currentState != null && !currentState.shouldUse()){
@@ -132,7 +128,6 @@ public class ChessBoardBlockEntity extends BlockEntity implements ExtendedScreen
     @Override
     protected void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
         currentState.writeNbt(nbt);
-        System.out.println("Update Client");
 
         nbt.putInt("GameState", gameState.nbtValue);
         nbt.putBoolean("WhiteSetInserted", whiteSetInsereted);

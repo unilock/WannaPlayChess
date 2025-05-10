@@ -1,11 +1,10 @@
-package net.fieldb0y.wanna_play_chess.network.payloads;
+package net.fieldb0y.wanna_play_chess.network.c2sPayloads;
 
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fieldb0y.wanna_play_chess.WannaPlayChess;
 import net.fieldb0y.wanna_play_chess.block.entity.ChessBoardBlockEntity;
 import net.fieldb0y.wanna_play_chess.chess.PiecesData;
 import net.fieldb0y.wanna_play_chess.chess.gameStates.ChessGameState;
-import net.fieldb0y.wanna_play_chess.chess.gameStates.ChessLobbyState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;

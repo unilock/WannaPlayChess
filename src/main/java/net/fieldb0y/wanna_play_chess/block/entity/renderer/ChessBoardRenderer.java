@@ -12,6 +12,7 @@ import net.fieldb0y.wanna_play_chess.chess.utils.ChessPieces;
 import net.fieldb0y.wanna_play_chess.chess.utils.PieceAction;
 import net.fieldb0y.wanna_play_chess.item.custom.ChessPiece;
 import net.fieldb0y.wanna_play_chess.layer.ModModelLayers;
+import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -20,6 +21,7 @@ import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
 import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.RotationAxis;
 import net.minecraft.world.World;
@@ -27,6 +29,7 @@ import org.joml.Matrix4f;
 import org.joml.Vector2i;
 import org.joml.Vector4i;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -146,10 +149,10 @@ public class ChessBoardRenderer implements BlockEntityRenderer<ChessBoardBlockEn
     private void renderPossibleMoves(ChessBoardBlockEntity blockEntity, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
         if (blockEntity.currentState instanceof ChessGameState state){
             Map<PieceAction, List<Vector2i>> possibleMoves = state.getPossibleMoves();
-
-            for (PieceAction action : possibleMoves.keySet()){
+            System.out.println(possibleMoves);
+            if (!possibleMoves.isEmpty())
                 renderSquareOnCell(state.currentChosenCell.x, state.currentChosenCell.y, new Vector4i(252, 186, 3, 141), state.getGrid(), matrices, vertexConsumers, light, overlay);
-
+            for (PieceAction action : possibleMoves.keySet()){
                 Vector4i color = action.getColor();
                 for (Vector2i pos : possibleMoves.get(action)){
                     if (action != PieceAction.NONE && action != PieceAction.OTHER)

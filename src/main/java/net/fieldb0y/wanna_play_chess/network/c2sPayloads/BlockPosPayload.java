@@ -1,4 +1,4 @@
-package net.fieldb0y.wanna_play_chess.network.payloads;
+package net.fieldb0y.wanna_play_chess.network.c2sPayloads;
 
 import net.fieldb0y.wanna_play_chess.WannaPlayChess;
 import net.minecraft.network.RegistryByteBuf;

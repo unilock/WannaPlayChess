@@ -1,4 +1,4 @@
-package net.fieldb0y.wanna_play_chess.network.payloads;
+package net.fieldb0y.wanna_play_chess.network.c2sPayloads;
 
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fieldb0y.wanna_play_chess.WannaPlayChess;
@@ -12,12 +12,12 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 
-public record LobbyFirstPlayerRolePayload(BlockPos blockEntityPos, int role) implements CustomPayload {
-    public static final CustomPayload.Id<LobbyFirstPlayerRolePayload> ID = new CustomPayload.Id<>(Identifier.of(WannaPlayChess.MOD_ID, "lobby_first_player_role"));
-    public static final PacketCodec<RegistryByteBuf, LobbyFirstPlayerRolePayload> CODEC = PacketCodec.of(((payload, buf) -> {
+public record LobbyNoTimeControlCheckboxPayload(BlockPos blockEntityPos, boolean checked) implements CustomPayload {
+    public static final CustomPayload.Id<LobbyNoTimeControlCheckboxPayload> ID = new CustomPayload.Id<>(Identifier.of(WannaPlayChess.MOD_ID, "lobby_no_time_control_checkbox"));
+    public static final PacketCodec<RegistryByteBuf, LobbyNoTimeControlCheckboxPayload> CODEC = PacketCodec.of(((payload, buf) -> {
         buf.writeBlockPos(payload.blockEntityPos);
-        buf.writeInt(payload.role);
-    }), buf -> new LobbyFirstPlayerRolePayload(buf.readBlockPos(), buf.readInt()));
+        buf.writeBoolean(payload.checked);
+    }), buf -> new LobbyNoTimeControlCheckboxPayload(buf.readBlockPos(), buf.readBoolean()));
 
     @Override
     public Id<? extends CustomPayload> getId() {
@@ -25,11 +25,11 @@ public record LobbyFirstPlayerRolePayload(BlockPos blockEntityPos, int role) imp
     }
 
     public static void receive(CustomPayload payload, ServerPlayNetworking.Context context){
-        LobbyFirstPlayerRolePayload lobbyPayload = (LobbyFirstPlayerRolePayload)payload;
+        LobbyNoTimeControlCheckboxPayload lobbyPayload = (LobbyNoTimeControlCheckboxPayload)payload;
         ServerWorld world = context.player().getServerWorld();
         BlockEntity be = world.getBlockEntity(lobbyPayload.blockEntityPos);
         if (be instanceof ChessBoardBlockEntity blockEntity && blockEntity.currentState instanceof ChessLobbyState lobbyState){
-            lobbyState.setFirstPlayerRole(lobbyPayload.role);
+            lobbyState.setNoTimeControl(lobbyPayload.checked);
         }
     }
 }

@@ -3,7 +3,7 @@ package net.fieldb0y.wanna_play_chess.chess;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fieldb0y.wanna_play_chess.chess.gameStates.ChessGameState;
 import net.fieldb0y.wanna_play_chess.chess.renderingStates.ChessGameRenderingState;
-import net.fieldb0y.wanna_play_chess.network.payloads.CellClickPayload;
+import net.fieldb0y.wanna_play_chess.network.c2sPayloads.CellClickPayload;
 import net.fieldb0y.wanna_play_chess.screen.ChessRenderingCell;
 import net.fieldb0y.wanna_play_chess.utils.Utils;
 import net.minecraft.client.gui.DrawContext;

@@ -1,21 +1,17 @@
 package net.fieldb0y.wanna_play_chess.chess.renderingStates;
 
-import io.netty.util.internal.shaded.org.jctools.queues.MpscArrayQueue;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fieldb0y.wanna_play_chess.CameraAnimationPlayable;
 import net.fieldb0y.wanna_play_chess.WannaPlayChess;
 import net.fieldb0y.wanna_play_chess.block.entity.ChessBoardBlockEntity;
 import net.fieldb0y.wanna_play_chess.chess.gameStates.ChessGameOverState;
 import net.fieldb0y.wanna_play_chess.chess.gameStates.ChessState;
-import net.fieldb0y.wanna_play_chess.mixin.HandledScreenAccessor;
 import net.fieldb0y.wanna_play_chess.mixin.ScreenAccessor;
-import net.fieldb0y.wanna_play_chess.network.payloads.BackToLobbyButtonPayload;
+import net.fieldb0y.wanna_play_chess.network.c2sPayloads.BackToLobbyButtonPayload;
 import net.fieldb0y.wanna_play_chess.screen.ChessBoardScreen;
-import net.fieldb0y.wanna_play_chess.screenhandler.ChessBoardScreenHandler;
 import net.fieldb0y.wanna_play_chess.utils.Utils;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.util.math.MatrixStack;

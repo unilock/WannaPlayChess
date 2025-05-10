@@ -64,14 +64,14 @@ public class ChessGrid {
         putPiece(ChessPieces.BLACK_KNIGHT.id, 6, 0, false);
         putPiece(ChessPieces.BLACK_ROOK.id, 7, 0, false);
 
-        blockEntity.updateClientAndServer();
+        blockEntity.updateClient();
     }
 
     public void clearGrid(){
         this.data = new int[SIZE][SIZE];
         this.direction = blockEntity.getCachedState().get(ChessBoardBlock.FACING);
         this.pieceAnimator = new PieceAnimator(this);
-        blockEntity.updateClientAndServer();
+        blockEntity.updateClient();
     }
 
     public void writeNbt(NbtCompound nbt){
@@ -112,13 +112,13 @@ public class ChessGrid {
 
     public void putPiece(int piece, int x, int y){
         data[x][y] = piece;
-        blockEntity.updateClientAndServer();
+        blockEntity.updateClient();
     }
 
     public void putPiece(int piece, int x, int y, boolean updateClient){
         data[x][y] = piece;
         if (updateClient)
-            blockEntity.updateClientAndServer();
+            blockEntity.updateClient();
     }
 
     public void playPieceMovingAnimation(int fromX, int fromY, int toX, int toY){
@@ -131,7 +131,7 @@ public class ChessGrid {
             playPieceMovingAnimation(fromX, fromY, toX, toY);
             data[toX][toY] = pieceId;
             data[fromX][fromY] = ChessPieces.EMPTY.id;
-            blockEntity.updateClientAndServer();
+            blockEntity.updateClient();
         }
     }
 
@@ -233,7 +233,7 @@ public class ChessGrid {
         } else if (orientationPlayer == BLACK){
             this.direction = getDirectionToPlayer(blackPlayer);
         }
-        blockEntity.updateClientAndServer();
+        blockEntity.updateClient();
     }
 
     public void tick(){

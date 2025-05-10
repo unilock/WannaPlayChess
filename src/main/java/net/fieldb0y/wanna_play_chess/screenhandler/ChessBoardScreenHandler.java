@@ -4,7 +4,7 @@ import net.fieldb0y.wanna_play_chess.CameraAnimationPlayable;
 import net.fieldb0y.wanna_play_chess.block.ModBlocks;
 import net.fieldb0y.wanna_play_chess.block.entity.ChessBoardBlockEntity;
 import net.fieldb0y.wanna_play_chess.chess.gameStates.ChessGameState;
-import net.fieldb0y.wanna_play_chess.network.payloads.BlockPosPayload;
+import net.fieldb0y.wanna_play_chess.network.c2sPayloads.BlockPosPayload;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.Camera;
 import net.minecraft.entity.player.PlayerEntity;
@@ -12,7 +12,6 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerContext;
-import net.minecraft.screen.slot.Slot;
 
 import static net.fieldb0y.wanna_play_chess.block.entity.ChessBoardBlockEntity.*;
 

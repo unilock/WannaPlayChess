@@ -58,7 +58,7 @@ public class PiecesData {
                     this.data.get(cell).add(tag);
             }
         } else this.data.put(cell, realTags);
-        state.updateClientAndServer();
+        state.updateClient();
     }
 
     public void removeData(int x, int y, DataTag tag){
@@ -66,7 +66,7 @@ public class PiecesData {
             if (data.get(new Vector2i(x, y)).size() <= 1)
                 clearData(x, y);
             else this.data.get(new Vector2i(x, y)).remove(tag);
-            state.updateClientAndServer();
+            state.updateClient();
         }
     }
 
@@ -74,7 +74,7 @@ public class PiecesData {
         if (hasData(x, y)){
             this.data.get(new Vector2i(x, y)).clear();
             this.data.keySet().remove(new Vector2i(x, y));
-            state.updateClientAndServer();
+            state.updateClient();
         }
     }
 

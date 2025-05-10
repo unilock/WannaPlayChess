@@ -1,6 +1,5 @@
-package net.fieldb0y.wanna_play_chess.network.payloads;
+package net.fieldb0y.wanna_play_chess.network.c2sPayloads;
 
-import it.unimi.dsi.fastutil.ints.IntList;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fieldb0y.wanna_play_chess.WannaPlayChess;
 import net.fieldb0y.wanna_play_chess.block.entity.ChessBoardBlockEntity;

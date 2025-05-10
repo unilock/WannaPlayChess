@@ -28,12 +28,8 @@ public abstract class ChessState {
 
     public void readNbt(NbtCompound nbt){}
 
-    public void updateClientAndServer(){
-        this.blockEntity.updateClientAndServer();
-    }
-
-    public void updateClientOnly(){
-        this.blockEntity.updateClientOnly();
+    public void updateClient(){
+        this.blockEntity.updateClient();
     }
 
     public abstract void afterSwitch();

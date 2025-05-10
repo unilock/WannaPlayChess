@@ -1,6 +1,5 @@
 package net.fieldb0y.wanna_play_chess.item.custom;
 
-import com.sun.jdi.JDIPermission;
 import net.fieldb0y.wanna_play_chess.chess.utils.ChessPieces;
 import net.fieldb0y.wanna_play_chess.chess.ChessGrid;
 import net.fieldb0y.wanna_play_chess.chess.PiecesData;

@@ -1,17 +1,14 @@
 package net.fieldb0y.wanna_play_chess.screen;
 
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fieldb0y.wanna_play_chess.WannaPlayChess;
 import net.fieldb0y.wanna_play_chess.chess.ChessGrid;
 import net.fieldb0y.wanna_play_chess.chess.gameStates.ChessGameState;
 import net.fieldb0y.wanna_play_chess.chess.renderingStates.ChessGameRenderingState;
-import net.fieldb0y.wanna_play_chess.network.payloads.CellClickPayload;
-import net.fieldb0y.wanna_play_chess.utils.Utils;
+import net.fieldb0y.wanna_play_chess.network.c2sPayloads.CellClickPayload;
 import net.minecraft.client.gui.DrawContext;
 import org.joml.Vector2f;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;

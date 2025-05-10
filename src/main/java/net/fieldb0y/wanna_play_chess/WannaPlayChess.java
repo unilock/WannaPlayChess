@@ -3,7 +3,6 @@ package net.fieldb0y.wanna_play_chess;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
-import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
@@ -16,10 +15,10 @@ import net.fieldb0y.wanna_play_chess.item.ModComponents;
 import net.fieldb0y.wanna_play_chess.item.ModItemGroups;
 import net.fieldb0y.wanna_play_chess.item.ModItems;
 import net.fieldb0y.wanna_play_chess.item.custom.BoxForPieces;
-import net.fieldb0y.wanna_play_chess.network.payloads.*;
+import net.fieldb0y.wanna_play_chess.network.c2sPayloads.*;
+import net.fieldb0y.wanna_play_chess.network.s2cPayloads.SetGameTimeTextFieldPayload;
 import net.fieldb0y.wanna_play_chess.screenhandler.ModScreenHandlers;
 import net.fieldb0y.wanna_play_chess.sound.ModSounds;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,11 +43,12 @@ public class WannaPlayChess implements ModInitializer {
 		ModEntities.register();
 		FabricDefaultAttributeRegistry.register(ModEntities.PLAYER_COPY, PlayerCopyEntity.createAttributes());
 
-		registerPackets();
+		registerC2SPackets();
+		registerS2CPackets();
 		registerEvents();
 	}
 
-	private void registerPackets(){
+	private void registerC2SPackets(){
 		PayloadTypeRegistry.playC2S().register(JoinLobbyButtonPayload.ID, JoinLobbyButtonPayload.CODEC);
 		ServerPlayNetworking.registerGlobalReceiver(JoinLobbyButtonPayload.ID, JoinLobbyButtonPayload::receive);
 
@@ -87,7 +87,9 @@ public class WannaPlayChess implements ModInitializer {
 
 		PayloadTypeRegistry.playC2S().register(NoButtonPayload.ID, NoButtonPayload.CODEC);
 		ServerPlayNetworking.registerGlobalReceiver(NoButtonPayload.ID, NoButtonPayload::receive);
+	}
 
+	private void registerS2CPackets(){
 		PayloadTypeRegistry.playS2C().register(SetGameTimeTextFieldPayload.ID, SetGameTimeTextFieldPayload.CODEC);
 	}
 

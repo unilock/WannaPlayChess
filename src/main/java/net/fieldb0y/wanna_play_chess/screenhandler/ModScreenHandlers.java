@@ -2,7 +2,7 @@ package net.fieldb0y.wanna_play_chess.screenhandler;
 
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType;
 import net.fieldb0y.wanna_play_chess.WannaPlayChess;
-import net.fieldb0y.wanna_play_chess.network.payloads.BlockPosPayload;
+import net.fieldb0y.wanna_play_chess.network.c2sPayloads.BlockPosPayload;
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.packet.CustomPayload;

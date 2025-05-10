@@ -35,7 +35,7 @@ public class ChessGameOverState extends ChessState{
         this.players = Arrays.copyOf(players, 2);
         this.matedKingCell = grid.findPiecePos(chessGameState.getCheckedKing());
 
-        updateClientAndServer();
+        updateClient();
     }
 
     @Override
@@ -90,7 +90,7 @@ public class ChessGameOverState extends ChessState{
     @Override
     public void clear() {
         grid.clearGrid();
-        updateClientAndServer();
+        updateClient();
     }
 
     public boolean isPlayerInList(UUID uuid){

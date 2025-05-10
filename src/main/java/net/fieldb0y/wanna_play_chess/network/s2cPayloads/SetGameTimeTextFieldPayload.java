@@ -1,4 +1,4 @@
-package net.fieldb0y.wanna_play_chess.network.payloads;
+package net.fieldb0y.wanna_play_chess.network.s2cPayloads;
 
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fieldb0y.wanna_play_chess.WannaPlayChess;
@@ -8,7 +8,6 @@ import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.packet.CustomPayload;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.BlockPos;
 
 public record SetGameTimeTextFieldPayload(int timeInSec) implements CustomPayload {
     public static final Id<SetGameTimeTextFieldPayload> ID = new Id<>(Identifier.of(WannaPlayChess.MOD_ID, "set_time_text_field"));

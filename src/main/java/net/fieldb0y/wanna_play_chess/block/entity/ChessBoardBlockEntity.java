@@ -7,7 +7,7 @@ import net.fieldb0y.wanna_play_chess.chess.gameStates.ChessGameState;
 import net.fieldb0y.wanna_play_chess.chess.gameStates.ChessLobbyState;
 import net.fieldb0y.wanna_play_chess.chess.gameStates.ChessState;
 import net.fieldb0y.wanna_play_chess.item.ModComponents;
-import net.fieldb0y.wanna_play_chess.network.payloads.BlockPosPayload;
+import net.fieldb0y.wanna_play_chess.network.c2sPayloads.BlockPosPayload;
 import net.fieldb0y.wanna_play_chess.screenhandler.ChessBoardScreenHandler;
 import net.fieldb0y.wanna_play_chess.utils.GameState;
 import net.minecraft.block.Block;
@@ -115,14 +115,14 @@ public class ChessBoardBlockEntity extends BlockEntity implements ExtendedScreen
         if (role == WHITE)
             this.whiteSetInsereted = true;
         else this.blackSetInserted = true;
-        updateClientAndServer();
+        updateClient();
     }
 
     public void removePiecesSet(int role){
         if (role == WHITE)
             this.whiteSetInsereted = false;
         else this.blackSetInserted = false;
-        updateClientAndServer();
+        updateClient();
     }
 
     public boolean isSetInserted(int role){
@@ -171,7 +171,7 @@ public class ChessBoardBlockEntity extends BlockEntity implements ExtendedScreen
         if (getCachedState().get(ChessBoardBlock.GAME_STATE) != gameState.nbtValue){
             getWorld().setBlockState(getPos(), getCachedState().with(ChessBoardBlock.GAME_STATE, gameState.nbtValue));
         }
-        updateClientAndServer();
+        updateClient();
     }
 
     @Override
@@ -202,16 +202,10 @@ public class ChessBoardBlockEntity extends BlockEntity implements ExtendedScreen
     }
 
 
-    public void updateClientAndServer() {
+    public void updateClient() {
         this.markDirty();
         if (world != null && !world.isClient) {
             world.updateListeners(pos, getCachedState(), getCachedState(), Block.NOTIFY_ALL);
-        }
-    }
-
-    public void updateClientOnly() {
-        if (world != null && !world.isClient) {
-           world.updateListeners(pos, getCachedState(), getCachedState(), Block.NOTIFY_ALL);
         }
     }
 

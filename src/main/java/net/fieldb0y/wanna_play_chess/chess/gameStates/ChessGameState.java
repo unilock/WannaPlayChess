@@ -81,7 +81,7 @@ public class ChessGameState extends ChessState {
         this.blackTimeLeft = noTimeControl ? -1 : gameTime;
 
         gameTimers = new Timer[]{new Timer(this::whiteTimerTick, 1), new Timer(this::blackTimerTick, 1)};
-        updateClientAndServer();
+        updateClient();
 
         if (blockEntity.getWorld().isClient()) {
             MinecraftClient client = MinecraftClient.getInstance();
@@ -156,7 +156,7 @@ public class ChessGameState extends ChessState {
                 }
             }
         }
-        updateClientAndServer();
+        updateClient();
     }
 
     private void updatePremoveTags(){
@@ -238,14 +238,14 @@ public class ChessGameState extends ChessState {
         whiteTimeLeft--;
         if (whiteTimeLeft <= 0)
             gameOver(ChessGameOverReason.TIME_IS_UP, BLACK);
-        updateClientOnly();
+        updateClient();
     }
 
     public void blackTimerTick(){
         blackTimeLeft--;
         if (blackTimeLeft <= 0)
             gameOver(ChessGameOverReason.TIME_IS_UP, WHITE);
-        updateClientOnly();
+        updateClient();
     }
 
     private void updateShouldTurnTag(){
@@ -316,7 +316,7 @@ public class ChessGameState extends ChessState {
             }
         }
         updateCastleTags(whiteKingPos, blackKingPos);
-        updateClientAndServer();
+        updateClient();
     }
 
     private void updateCastleTags(Vector2i whiteKingPos, Vector2i blackKingPos){
@@ -419,7 +419,7 @@ public class ChessGameState extends ChessState {
 
     public void nextTurn(){
         currentTurn = currentTurn == WHITE ? BLACK : WHITE;
-        updateClientAndServer();
+        updateClient();
     }
 
     public Map<PieceAction, List<Vector2i>> getPossibleMoves(){
@@ -559,7 +559,7 @@ public class ChessGameState extends ChessState {
                 getWorld().getPlayerByUuid(players[role]).playSoundToPlayer(ModSounds.NOTIFY, SoundCategory.BLOCKS,1, 1);
         }
 
-        updateClientAndServer();
+        updateClient();
     }
 
     public void setDrawOfferRole(int role){
@@ -570,7 +570,7 @@ public class ChessGameState extends ChessState {
             if (player != null)
                 player.playSoundToPlayer(ModSounds.NOTIFY, SoundCategory.BLOCKS,1, 1);
         }
-        updateClientAndServer();
+        updateClient();
     }
 
     @Override
@@ -591,7 +591,7 @@ public class ChessGameState extends ChessState {
         this.gameTimers = new Timer[2];
         this.resignOfferRole = -1;
         this.drawOfferRole = -1;
-        updateClientAndServer();
+        updateClient();
     }
 
     public ChessGrid getGrid() {

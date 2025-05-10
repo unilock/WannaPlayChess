@@ -60,10 +60,16 @@ public class ChessGameRenderingState extends ChessRenderingState {
     private float piecesChooserY = -49;
     private float gameStatsY = -87;
 
+    private int whiteTimeLeftInSec = -1;
+    private int blackTimeLeftInSec = -1;
+
     public ChessGameRenderingState(ChessState serverState, ChessBoardScreen screen) {
         super(serverState, screen, new RenderingProperties(false, false));
+        ChessGameState gameState = (ChessGameState)serverState;
         this.player = client.player;
         this.focusCamera();
+        this.whiteTimeLeftInSec = gameState.whiteTimeLeft;
+        this.blackTimeLeftInSec = gameState.blackTimeLeft;
 
         if (serverState.shouldUse()) init();
     }
@@ -131,8 +137,8 @@ public class ChessGameRenderingState extends ChessRenderingState {
 
         if (gameState.getPlayers()[WHITE] != null && gameState.getPlayers()[BLACK] != null){
             int currentTurn = gameState.currentTurn;
-            Vector2i whiteTime = Utils.secondsToMinAndSec(gameState.whiteTimeLeft);
-            Vector2i blackTime = Utils.secondsToMinAndSec(gameState.blackTimeLeft);
+            Vector2i whiteTime = Utils.secondsToMinAndSec(whiteTimeLeftInSec);
+            Vector2i blackTime = Utils.secondsToMinAndSec(blackTimeLeftInSec);
             float textScale = 1.0f;
 
             matrices.push();
@@ -160,6 +166,11 @@ public class ChessGameRenderingState extends ChessRenderingState {
             Utils.renderScaledHead(context, whitePlayerHead, whiteSkullScale, getScreenWidth() - 86, (int)(gameStatsY + 3));
             Utils.renderScaledHead(context, blackPlayerHead, blackSkullScale, getScreenWidth() - 86, (int)(gameStatsY + 28));
         }
+    }
+
+    public void updateTimer(int whiteTimeLeftInSec, int blackTimeLeftInSec){
+        this.whiteTimeLeftInSec = whiteTimeLeftInSec;
+        this.blackTimeLeftInSec = blackTimeLeftInSec;
     }
 
     public void renderPieceChooser(DrawContext context, int mouseX, int mouseY, int role, float delta){

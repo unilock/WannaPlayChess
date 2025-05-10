@@ -2,6 +2,8 @@ package net.fieldb0y.wanna_play_chess;
 
 import net.fabricmc.api.ModInitializer;
 
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerBlockEntityEvents;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
@@ -17,6 +19,7 @@ import net.fieldb0y.wanna_play_chess.item.ModItems;
 import net.fieldb0y.wanna_play_chess.item.custom.BoxForPieces;
 import net.fieldb0y.wanna_play_chess.network.c2sPayloads.*;
 import net.fieldb0y.wanna_play_chess.network.s2cPayloads.SetGameTimeTextFieldPayload;
+import net.fieldb0y.wanna_play_chess.network.s2cPayloads.TimerUpdatePayload;
 import net.fieldb0y.wanna_play_chess.screenhandler.ModScreenHandlers;
 import net.fieldb0y.wanna_play_chess.sound.ModSounds;
 import net.minecraft.util.ActionResult;
@@ -87,10 +90,14 @@ public class WannaPlayChess implements ModInitializer {
 
 		PayloadTypeRegistry.playC2S().register(NoButtonPayload.ID, NoButtonPayload.CODEC);
 		ServerPlayNetworking.registerGlobalReceiver(NoButtonPayload.ID, NoButtonPayload::receive);
+
+		PayloadTypeRegistry.playC2S().register(NbtUpdatePayload.ID, NbtUpdatePayload.CODEC);
+		ServerPlayNetworking.registerGlobalReceiver(NbtUpdatePayload.ID, NbtUpdatePayload::receive);
 	}
 
 	private void registerS2CPackets(){
 		PayloadTypeRegistry.playS2C().register(SetGameTimeTextFieldPayload.ID, SetGameTimeTextFieldPayload.CODEC);
+		PayloadTypeRegistry.playS2C().register(TimerUpdatePayload.ID, TimerUpdatePayload.CODEC);
 	}
 
 	public void registerEvents(){
@@ -110,6 +117,12 @@ public class WannaPlayChess implements ModInitializer {
 			}
 
 			return ActionResult.PASS;
+		}));
+
+		ServerBlockEntityEvents.BLOCK_ENTITY_UNLOAD.register(((be, serverWorld) -> {
+			if (be instanceof ChessBoardBlockEntity blockEntity){
+				blockEntity.updateClient();
+			}
 		}));
 	}
 }

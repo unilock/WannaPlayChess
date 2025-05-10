@@ -132,6 +132,7 @@ public class ChessBoardBlockEntity extends BlockEntity implements ExtendedScreen
     @Override
     protected void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
         currentState.writeNbt(nbt);
+        System.out.println("Update Client");
 
         nbt.putInt("GameState", gameState.nbtValue);
         nbt.putBoolean("WhiteSetInserted", whiteSetInsereted);

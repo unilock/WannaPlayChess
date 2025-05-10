@@ -1,5 +1,7 @@
 package net.fieldb0y.wanna_play_chess.chess.gameStates;
 
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fieldb0y.wanna_play_chess.CameraAnimationPlayable;
 import net.fieldb0y.wanna_play_chess.block.entity.ChessBoardBlockEntity;
 import net.fieldb0y.wanna_play_chess.chess.ChessGrid;
@@ -7,6 +9,7 @@ import net.fieldb0y.wanna_play_chess.chess.PiecesData;
 import net.fieldb0y.wanna_play_chess.chess.utils.ChessGameOverReason;
 import net.fieldb0y.wanna_play_chess.chess.utils.PieceAction;
 import net.fieldb0y.wanna_play_chess.item.custom.ChessPiece;
+import net.fieldb0y.wanna_play_chess.network.s2cPayloads.TimerUpdatePayload;
 import net.fieldb0y.wanna_play_chess.sound.ModSounds;
 import net.fieldb0y.wanna_play_chess.utils.GameState;
 import net.fieldb0y.wanna_play_chess.utils.Utils;
@@ -17,6 +20,8 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtHelper;
 import net.minecraft.nbt.NbtInt;
 import net.minecraft.nbt.NbtList;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import org.joml.Vector2i;
@@ -238,14 +243,25 @@ public class ChessGameState extends ChessState {
         whiteTimeLeft--;
         if (whiteTimeLeft <= 0)
             gameOver(ChessGameOverReason.TIME_IS_UP, BLACK);
-        updateClient();
+        //updateClient();
+        updateTimerOnClient();
     }
 
     public void blackTimerTick(){
         blackTimeLeft--;
         if (blackTimeLeft <= 0)
             gameOver(ChessGameOverReason.TIME_IS_UP, WHITE);
-        updateClient();
+        //updateClient();
+        updateTimerOnClient();
+    }
+
+    public void updateTimerOnClient(){
+        if (getWorld() instanceof ServerWorld serverWorld){
+            for (ServerPlayerEntity player : serverWorld.getPlayers()){
+                if (player.getUuid().compareTo(players[WHITE]) == 0) ServerPlayNetworking.send(player, new TimerUpdatePayload(blockEntity.getPos(), whiteTimeLeft, blackTimeLeft));
+                else if (player.getUuid().compareTo(players[BLACK]) == 0) ServerPlayNetworking.send(player, new TimerUpdatePayload(blockEntity.getPos(), whiteTimeLeft, blackTimeLeft));
+            }
+        }
     }
 
     private void updateShouldTurnTag(){

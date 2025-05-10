@@ -12,6 +12,7 @@ import net.fieldb0y.wanna_play_chess.entity.client.model.PlayerCopyModel;
 import net.fieldb0y.wanna_play_chess.entity.client.renderer.PlayerCopyRenderer;
 import net.fieldb0y.wanna_play_chess.layer.ModModelLayers;
 import net.fieldb0y.wanna_play_chess.network.s2cPayloads.SetGameTimeTextFieldPayload;
+import net.fieldb0y.wanna_play_chess.network.s2cPayloads.TimerUpdatePayload;
 import net.fieldb0y.wanna_play_chess.screen.ChessBoardScreen;
 import net.fieldb0y.wanna_play_chess.screenhandler.ModScreenHandlers;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
@@ -31,6 +32,7 @@ public class WannaPlayChessClient implements ClientModInitializer {
 
     private void registerS2CPackets(){
         ClientPlayNetworking.registerGlobalReceiver(SetGameTimeTextFieldPayload.ID, SetGameTimeTextFieldPayload::receive);
+        ClientPlayNetworking.registerGlobalReceiver(TimerUpdatePayload.ID, TimerUpdatePayload::receive);
     }
 
     private void registerRenderers(){

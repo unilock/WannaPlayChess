@@ -1,10 +1,13 @@
 package net.fieldb0y.wanna_play_chess.screen;
 
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fieldb0y.wanna_play_chess.block.entity.ChessBoardBlockEntity;
 import net.fieldb0y.wanna_play_chess.chess.renderingStates.ChessGameOverRenderingState;
 import net.fieldb0y.wanna_play_chess.chess.renderingStates.ChessGameRenderingState;
 import net.fieldb0y.wanna_play_chess.chess.renderingStates.ChessLobbyRenderingState;
 import net.fieldb0y.wanna_play_chess.chess.renderingStates.ChessRenderingState;
+import net.fieldb0y.wanna_play_chess.network.c2sPayloads.NbtUpdatePayload;
 import net.fieldb0y.wanna_play_chess.screenhandler.ChessBoardScreenHandler;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
@@ -19,16 +22,19 @@ import java.util.List;
 public class ChessBoardScreen extends HandledScreen<ChessBoardScreenHandler> {
     public List<ChessRenderingState> renderingGameStates = new ArrayList<>();
     public ChessRenderingState currentRenderingState;
+    public ChessBoardScreenHandler handler;
     private int previousFov = 70;
     private int currentFov = 0;
 
     public ChessBoardScreen(ChessBoardScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
+        this.handler = handler;
     }
 
     @Override
     protected void init() {
         super.init();
+        ClientPlayNetworking.send(new NbtUpdatePayload(handler.blockEntity.getPos()));
         setupRenderingStates();
         client.options.hudHidden = true;
         previousFov = client.options.getFov().getValue();
@@ -40,6 +46,7 @@ public class ChessBoardScreen extends HandledScreen<ChessBoardScreenHandler> {
     public void close() {
         client.options.hudHidden = false;
         client.options.getFov().setValue(previousFov);
+        ClientPlayNetworking.send(new NbtUpdatePayload(handler.blockEntity.getPos()));
         super.close();
     }
 

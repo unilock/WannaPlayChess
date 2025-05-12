@@ -150,23 +150,26 @@ public class ChessLobbyRenderingState extends ChessRenderingState {
         manageTimeTextFields();
         ((CheckBoxAccessor)noTimeControlCheckbox).setChecked(chessLobbyState.noTimeControl);
 
-        if ((!blockEntity.blackSetInserted || !blockEntity.whiteSetInsereted) && !client.player.isCreative()){
-            if (!blockEntity.blackSetInserted && !blockEntity.whiteSetInsereted) startGameButton.setTooltip(Tooltip.of(NEITHER_SET_INSERTED_TEXT));
-            else if (!blockEntity.whiteSetInsereted) startGameButton.setTooltip(Tooltip.of(WHITE_SET_ISNT_INSERTED_TEXT));
-            else startGameButton.setTooltip(Tooltip.of(BLACK_SET_ISNT_INSERTED_TEXT));
-            this.startGameButton.active = false;
-        } else {
-            if (blockEntity.getGameState().equals(GameState.NOT_READY_TO_PLAY)){
+        if(chessLobbyState.isPlayerInLobby(client.player.getUuid())) {
+            if ((!blockEntity.blackSetInserted || !blockEntity.whiteSetInsereted) && !client.player.isCreative()) {
+                if (!blockEntity.blackSetInserted && !blockEntity.whiteSetInsereted)
+                    startGameButton.setTooltip(Tooltip.of(NEITHER_SET_INSERTED_TEXT));
+                else if (!blockEntity.whiteSetInsereted)
+                    startGameButton.setTooltip(Tooltip.of(WHITE_SET_ISNT_INSERTED_TEXT));
+                else startGameButton.setTooltip(Tooltip.of(BLACK_SET_ISNT_INSERTED_TEXT));
                 this.startGameButton.active = false;
-                if (blockEntity.blackSetInserted && blockEntity.whiteSetInsereted)
-                    startGameButton.setTooltip(Tooltip.of(Text.empty()));
+            } else {
+                if (blockEntity.getGameState().equals(GameState.NOT_READY_TO_PLAY)) {
+                    this.startGameButton.active = false;
+                    if (blockEntity.blackSetInserted && blockEntity.whiteSetInsereted)
+                        startGameButton.setTooltip(Tooltip.of(Text.empty()));
+                } else {
+                    startGameButton.setTooltip(Tooltip.of(START_WORD.copy().formatted(Formatting.ITALIC).append(" ")
+                            .append(blockEntity.getGameState().equals(GameState.READY_FOR_SINGLEPLAYER_GAME) ? SINGLEPLAYER_TEXT : MULTIPLAYER_TEXT).append(" ").append(GAME_WORD)));
+                    this.startGameButton.active = true;
+                }
             }
-            else {
-                startGameButton.setTooltip(Tooltip.of(START_WORD.copy().formatted(Formatting.ITALIC).append(" ")
-                        .append(blockEntity.getGameState().equals(GameState.READY_FOR_SINGLEPLAYER_GAME) ? SINGLEPLAYER_TEXT : MULTIPLAYER_TEXT).append(" ").append(GAME_WORD)));
-                this.startGameButton.active = true;
-            }
-        }
+        } else this.startGameButton.active = false;
 
         int centerX = getScreenWidth()/2;
         int centerY = getScreenHeight()/2;

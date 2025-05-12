@@ -3,7 +3,6 @@ package net.fieldb0y.wanna_play_chess;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerBlockEntityEvents;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
@@ -11,7 +10,6 @@ import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRe
 import net.fieldb0y.wanna_play_chess.block.ModBlocks;
 import net.fieldb0y.wanna_play_chess.block.entity.ChessBoardBlockEntity;
 import net.fieldb0y.wanna_play_chess.block.entity.ModBlockEntities;
-import net.fieldb0y.wanna_play_chess.chess.gameStates.ChessGameState;
 import net.fieldb0y.wanna_play_chess.chess.gameStates.ChessLobbyState;
 import net.fieldb0y.wanna_play_chess.entity.ModEntities;
 import net.fieldb0y.wanna_play_chess.entity.custom.PlayerCopyEntity;

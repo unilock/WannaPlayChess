@@ -549,7 +549,12 @@ public class ChessGameState extends ChessState {
     }
 
     public boolean isPlayerInList(UUID uuid){
-        return players[WHITE].compareTo(uuid) == 0 || players[BLACK].compareTo(uuid) == 0;
+        boolean r1 = false, r2 = false;
+        if (players[WHITE] != null)
+            r1 = players[WHITE].compareTo(uuid) == 0;
+        if (players[BLACK] != null)
+            r2 = players[BLACK].compareTo(uuid) == 0;
+        return  r1 || r2;
     }
 
     @Override

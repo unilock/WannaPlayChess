@@ -19,7 +19,7 @@ public class PlayerCopyRenderer extends LivingEntityRenderer<PlayerCopyEntity, P
 
     @Override
     public Identifier getTexture(PlayerCopyEntity entity) {
-        return entity.getSkin() != null ? entity.getSkin() : Identifier.of(WannaPlayChess.MOD_ID,"textures/entity/player_copy1.png");
+        return entity.getSkin() != null ? entity.getSkin() : Identifier.of(WannaPlayChess.MOD_ID,"textures/entity/player_copy.png");
     }
 
     @Override

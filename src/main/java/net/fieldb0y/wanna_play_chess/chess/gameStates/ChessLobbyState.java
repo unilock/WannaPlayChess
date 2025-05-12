@@ -128,8 +128,14 @@ public class ChessLobbyState extends ChessState {
     }
 
     public boolean isPlayerInLobby(UUID uuid){
-        return playersInLobby[FIRST].compareTo(uuid) == 0 || playersInLobby[SECOND].compareTo(uuid) == 0;
+        boolean r1 = false, r2 = false;
+        if (playersInLobby[FIRST] != null)
+            r1 = playersInLobby[FIRST].compareTo(uuid) == 0;
+        if(playersInLobby[SECOND] != null)
+            r2 = playersInLobby[SECOND].compareTo(uuid) == 0;
+        return r1 || r2;
     }
+
 
     @Override
     public void clear() {

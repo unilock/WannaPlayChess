@@ -37,7 +37,7 @@ public record StartGameButtonPayload(BlockPos blockEntityPos) implements CustomP
         if(be instanceof ChessBoardBlockEntity blockEntity){
             GameState gameState = blockEntity.getGameState();
             if (gameState.equals(GameState.READY_TO_PLAY) || gameState.equals(GameState.READY_FOR_SINGLEPLAYER_GAME)){
-                List<PlayerEntity> players = (List<PlayerEntity>) blockEntity.getWorld().getPlayers();
+                List<? extends PlayerEntity> players = blockEntity.getWorld().getPlayers();
                 BlockPos bePos = blockEntity.getPos();
                 Box box = new Box(bePos.getX() - OFFSET, bePos.getY() - OFFSET, bePos.getZ() - OFFSET, bePos.getX() + OFFSET, bePos.getY() + OFFSET, bePos.getZ() + OFFSET);
 

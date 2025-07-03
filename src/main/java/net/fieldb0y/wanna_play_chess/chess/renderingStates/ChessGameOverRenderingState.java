@@ -61,7 +61,7 @@ public class ChessGameOverRenderingState extends ChessRenderingState {
             ClientPlayNetworking.send(new BackToLobbyButtonPayload(blockEntity.getPos()));
         }).dimensions(centerX - 39, centerY + 52, 80, 18).build();
 
-        ((ScreenAccessor)screen).addWidget(backToLobbyButton);
+        ((ScreenAccessor)screen).callAddDrawableChild(backToLobbyButton);
     }
 
     @Override

@@ -108,12 +108,12 @@ public class ChessLobbyRenderingState extends ChessRenderingState {
         roleClickableChooser.onScreenResize(true);
         this.firstPlayerRole = ((ChessLobbyState)serverState).firstPlayerRole;
 
-        ((ScreenAccessor)screen).addWidget(joinLobbyButton);
-        ((ScreenAccessor)screen).addWidget(leaveLobbyButton);
-        ((ScreenAccessor)screen).addWidget(startGameButton);
-        ((ScreenAccessor)screen).addWidget(timeInMinsTextField);
-        ((ScreenAccessor)screen).addWidget(timeInSecTextField);
-        ((ScreenAccessor)screen).addWidget(noTimeControlCheckbox);
+        ((ScreenAccessor)screen).callAddDrawableChild(joinLobbyButton);
+        ((ScreenAccessor)screen).callAddDrawableChild(leaveLobbyButton);
+        ((ScreenAccessor)screen).callAddDrawableChild(startGameButton);
+        ((ScreenAccessor)screen).callAddDrawableChild(timeInMinsTextField);
+        ((ScreenAccessor)screen).callAddDrawableChild(timeInSecTextField);
+        ((ScreenAccessor)screen).callAddDrawableChild(noTimeControlCheckbox);
     }
 
     @Override

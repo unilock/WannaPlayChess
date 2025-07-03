@@ -104,10 +104,10 @@ public class ChessGameRenderingState extends ChessRenderingState {
         }).dimensions(getScreenWidth()/2 + 10, 18, 40, 13).build();
 
 
-        ((ScreenAccessor)screen).addWidget(offerDrawButton);
-        ((ScreenAccessor)screen).addWidget(resignButton);
-        ((ScreenAccessor)screen).addWidget(yesButton);
-        ((ScreenAccessor)screen).addWidget(noButton);
+        ((ScreenAccessor)screen).callAddDrawableChild(offerDrawButton);
+        ((ScreenAccessor)screen).callAddDrawableChild(resignButton);
+        ((ScreenAccessor)screen).callAddDrawableChild(yesButton);
+        ((ScreenAccessor)screen).callAddDrawableChild(noButton);
     }
 
     @Override

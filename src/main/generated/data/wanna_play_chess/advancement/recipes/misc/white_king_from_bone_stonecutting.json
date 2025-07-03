@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:white_king_from_bone_stonecutting"
+        "recipe": "wanna_play_chess:white_king_from_bone_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:white_king_from_bone_stonecutting"
+      "wanna_play_chess:white_king_from_bone_stonecutting"
     ]
   }
 }

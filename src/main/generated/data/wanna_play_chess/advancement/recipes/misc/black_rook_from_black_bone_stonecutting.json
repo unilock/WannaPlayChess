@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:black_rook_from_black_bone_stonecutting"
+        "recipe": "wanna_play_chess:black_rook_from_black_bone_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:black_rook_from_black_bone_stonecutting"
+      "wanna_play_chess:black_rook_from_black_bone_stonecutting"
     ]
   }
 }
